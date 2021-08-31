@@ -4,6 +4,41 @@
             "name": "EdgeGamers Jailbreak",
             "channel": "802436744367570946",
             "ip": "74.91.113.83:27015"
+        },
+        {
+            "name": "EdgeGamers TTT",
+            "channel": "802436744367570946",
+            "ip": "74.91.113.113:27015"
+        },
+        {
+            "name": "EdgeGamers AWP",
+            "channel": "802436744367570946",
+            "ip": "104.128.58.205:27015"
+        },
+        {
+            "name": "EdgeGamers SURF",
+            "channel": "802436744367570946",
+            "ip": "66.85.14.237:27015"
+        },
+        {
+            "name": "EdgeGamers BHOP",
+            "channel": "802436744367570946",
+            "ip": "74.91.124.34:27015"
+        },
+        {
+            "name": "EdgeGamers CLIMB",
+            "channel": "802436744367570946",
+            "ip": "104.128.58.204:27015"
+        },
+        {
+            "name": "EdgeGamers MG",
+            "channel": "802436744367570946",
+            "ip": "64.74.97.39:27015"
+        },
+        {
+            "name": "EdgeGamers SURF SUMMER",
+            "channel": "802436744367570946",
+            "ip": "192.223.30.182:27015"
         }
     ]
 }

@@ -37,7 +37,7 @@ export class EmbedGenerator implements Generator {
             footer = footer.substring(0, footer.length - 2);
         }
         if (data.left.length > 0) {
-            footer += "[-] ";
+            footer += (footer.length == 0 ? "" : "\n") + "[-] ";
             for (let p of data.left)
                 footer += p + ", ";
             footer = footer.substring(0, footer.length - 2);
