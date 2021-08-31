@@ -30,7 +30,7 @@ export class EmbedGenerator implements Generator {
 
         let footer = "";
 
-        if (data.joined.length > 0) {
+        if (data.joined.length > 0 && data.joined.length !== data.players.length) {
             footer += "[+] ";
             for (let p of data.joined)
                 footer += p + ", ";

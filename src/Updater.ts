@@ -11,7 +11,7 @@ export class Updater {
     public constructor(data: ServerData) {
         this.ip = data.ip.split(":")[0];
         this.port = parseInt(data.ip.split(":")[1]);
-        this.data = data;
+        this.data = new ServerData(data);
     }
 
     async update() {
@@ -36,14 +36,14 @@ export class Updater {
         });
     }
 
-    public start(rate: number) {
+    public start(cooldown: number, rate: number) {
         if (this.cancelled)
             return;
         setTimeout(() => {
             if (this.cancelled)
                 return;
             this.update();
-            this.start(rate);
-        }, rate);
+            this.start(rate, rate);
+        }, cooldown);
     }
 }

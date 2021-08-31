@@ -26,11 +26,13 @@ export class ServerData {
         for (let p of data.players) {
             if (!this.players.includes(p)) {
                 this.joined.push(p);
+                console.log(p + " joined");
             }
         }
         for (let p of this.players) {
             if (!data.players.includes(p)) {
                 this.left.push(p);
+                console.log(p + " left");
             }
         }
         this.players = data.players;

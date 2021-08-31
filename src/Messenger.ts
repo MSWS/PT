@@ -1,5 +1,4 @@
-import { TextChannel } from "discord.js";
-import { client, generator } from ".";
+import { generator } from ".";
 import { ServerData } from "./ServerData";
 import { getTextChannel, sendMessageID } from "./Utils";
 
@@ -29,8 +28,9 @@ export class Messenger {
     }
 
     async purge(channel: string) {
-        let chan = getTextChannel(channel);
-        (chan as TextChannel).bulkDelete(100);
+        getTextChannel(channel)?.bulkDelete(50).catch(error => {
+            console.error('Failed to delete the message:', error);
+        });
     }
 
     send(data: ServerData) {
@@ -39,14 +39,14 @@ export class Messenger {
         sendMessageID(data.channel, generator.generateMessage(data), data);
     }
 
-    public hasServerData(data: ServerData) {
+    public hasServerData(data: ServerData): ServerData | null {
         for (let svs of this.data.values()) {
             for (let server of svs) {
                 if (server.name == data.name)
-                    return true;
+                    return server;
             }
         }
-        return false;
+        return null;
     }
 
     public cancel() {
@@ -54,18 +54,15 @@ export class Messenger {
     }
 
     public update(data: ServerData) {
-        if (!this.hasServerData(data)) {
+        let dat = this.hasServerData(data);
+        if (!dat) {
             console.warn("Attempted to save " + data.channel + " when we aren't responsible for it.");
             return;
         }
-        let ds = this.data.get(data.channel);
-        if (ds == undefined)
-            ds = [];
-        ds = ds.filter(e => e.name === data.name);
-        this.data.set(data.channel, ds);
+        dat.update(data);
     }
 
-    public start(rate: number) {
+    public start(cooldown: number, rate: number) {
         if (this.cancelled)
             return;
         setTimeout(() => {
@@ -73,8 +70,8 @@ export class Messenger {
                 return;
             for (let data of this.data.values())
                 data.forEach(d => this.send(d));
-            this.start(rate);
-        }, rate);
+            this.start(rate, rate);
+        }, cooldown);
         console.log(this.data);
     }
 

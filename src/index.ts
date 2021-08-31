@@ -35,12 +35,13 @@ function login() {
         for (let server of c) {
           messengerMap.set(server.name, mn);
         }
-        new Messenger(c).start(10000);
+
+        new Messenger(c).start(5000, 60000);
       }
     }
     for (let sd of servers.values()) {
       for (let server of sd) {
-        new Updater(server).start(10000);
+        new Updater(server).start(0, 60000);
       }
     }
   });
